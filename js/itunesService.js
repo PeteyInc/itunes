@@ -17,4 +17,21 @@ angular.module('itunes').service('itunesService', function($http, $q){
     return deferred.promise;
   };
 
+  this.sortData = function(searchInfo) {
+    var gridArray = [];
+    for (var i = 0; i < searchInfo.length; i++) {
+      var correctData = {};
+      searchInfo[i].previewUrl && (correctData['Play'] = searchInfo[i].previewUrl);
+      searchInfo[i].trackName && (correctData['Song'] = searchInfo[i].trackName);
+      searchInfo[i].artistName && (correctData['Artist'] = searchInfo[i].artistName);
+      searchInfo[i].collectionName && (correctData['Collection'] = searchInfo[i].collectionName);
+      searchInfo[i].artworkUrl60 && (correctData['AlbumArt'] = searchInfo[i].artworkUrl100);
+      searchInfo[i].kind && (correctData['Type'] = searchInfo[i].kind);
+      searchInfo[i].trackPrice && (correctData['IndividualPrice'] = searchInfo[i].trackPrice);
+      searchInfo[i].collectionPrice && (correctData['CollectionPrice'] = searchInfo[i].collectionPrice);
+      gridArray.push(correctData);
+    }
+    return gridArray;
+  };
+
 });
